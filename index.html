@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Md Didarul Alam Chowdhury | Full Stack .NET Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b18;
+      --card: rgba(15, 23, 42, 0.78);
+      --card-2: rgba(30, 41, 59, 0.72);
+      --primary: #38bdf8;
+      --secondary: #818cf8;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.18);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.18), transparent 30%),
+        radial-gradient(circle at 85% 12%, rgba(129, 140, 248, 0.18), transparent 28%),
+        linear-gradient(135deg, #020617 0%, var(--bg) 55%, #111827 100%);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1160px, 92%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(2, 6, 23, 0.76);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a { transition: 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    .hero {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      gap: 52px;
+      padding: 74px 0 54px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -120px 50px auto;
+      width: 280px;
+      height: 280px;
+      background: rgba(56, 189, 248, 0.12);
+      filter: blur(60px);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 15px;
+      border: 1px solid rgba(56, 189, 248, 0.38);
+      background: rgba(56, 189, 248, 0.08);
+      border-radius: 999px;
+      color: #bae6fd;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.75);
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6.8vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -3px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--primary), #a78bfa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 660px;
+      color: #cbd5e1;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 13px 20px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #020617;
+      box-shadow: 0 16px 34px rgba(56, 189, 248, 0.22);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 680px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .profile-panel {
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(15,23,42,0.92), rgba(30,41,59,0.74));
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-panel::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 260px;
+      height: 260px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.25), rgba(129,140,248,0.25));
+      filter: blur(20px);
+      border-radius: 50%;
+    }
+
+    .avatar {
+      width: 154px;
+      height: 154px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: grid;
+      place-items: center;
+      font-size: 50px;
+      font-weight: 900;
+      margin-bottom: 22px;
+      box-shadow: 0 18px 40px rgba(56, 189, 248, 0.20);
+      position: relative;
+    }
+
+    .profile-panel h3 {
+      font-size: 25px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .profile-panel p {
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .quick-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+      position: relative;
+    }
+
+    .pill {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.09);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      color: #bae6fd;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    section { padding: 86px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 4vw, 44px);
+      letter-spacing: -1.4px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    .glass-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+    }
+
+    .focus-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .focus-list li {
+      padding: 14px 16px;
+      background: rgba(2, 6, 23, 0.38);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      color: #cbd5e1;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .skill-card, .project-card {
+      background: var(--card-2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      transition: 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before, .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.10), transparent 38%);
+      opacity: 0;
+      transition: 0.25s;
+    }
+
+    .skill-card:hover, .project-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .skill-card:hover::before, .project-card:hover::before { opacity: 1; }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary);
+      font-size: 22px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .skill-card h3, .project-card h3 {
+      font-size: 19px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .skill-card p, .project-card p {
+      color: #cbd5e1;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.10);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.20);
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+      position: relative;
+    }
+
+    .tech span {
+      font-size: 12px;
+      font-weight: 800;
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.20);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 7px 9px;
+      border-radius: 999px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      position: relative;
+    }
+
+    .small-link {
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .contact-item {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--text);
+    }
+
+    .contact-item p {
+      color: #cbd5e1;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: rgba(2, 6, 23, 0.45);
+    }
+
+    @media (max-width: 980px) {
+      .hero, .about-grid { grid-template-columns: 1fr; }
+      .skills-grid, .projects-grid, .contact-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .hero h1 { letter-spacing: -1.5px; }
+      .skills-grid, .projects-grid, .contact-grid, .stats { grid-template-columns: 1fr; }
+      section { padding: 68px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">Didarul.dev</a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Available for Junior Software Engineer Roles</div>
+        <h1>Building practical software with <span>.NET, C# & SQL Server</span></h1>
+        <p>Hi, I am Md Didarul Alam Chowdhury, a Full Stack .NET Developer focused on clean architecture, database-driven systems, RESTful APIs, and responsive web interfaces.</p>
+
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="https://github.com/didar-code/Md-Didarul-Alam-Chowdhury" target="_blank" class="btn btn-outline">GitHub Profile</a>
+          <a href="https://www.linkedin.com/in/md-didarul-alam-chowdhury" target="_blank" class="btn btn-outline">LinkedIn</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>10+</strong><span>GitHub Projects</span></div>
+          <div class="stat"><strong>.NET</strong><span>Main Development Stack</span></div>
+          <div class="stat"><strong>SQL</strong><span>Database Focus</span></div>
+        </div>
+      </div>
+
+      <aside class="profile-panel">
+        <div class="avatar">DA</div>
+        <h3>Md Didarul Alam Chowdhury</h3>
+        <p><strong>Role:</strong> Full Stack .NET Developer</p>
+        <p><strong>Location:</strong> Dhaka, Bangladesh</p>
+        <p><strong>Email:</strong> chowdhuryd243@gmail.com</p>
+        <div class="quick-stack">
+          <span class="pill">C#</span>
+          <span class="pill">ASP.NET Core</span>
+          <span class="pill">SQL Server</span>
+          <span class="pill">Web API</span>
+          <span class="pill">React</span>
+          <span class="pill">Angular</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">About <span class="highlight">Me</span></h2>
+            <p class="section-subtitle">A developer profile focused on real-world business applications, clean code, and continuous learning.</p>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <div class="glass-card">
+            <p>I am a motivated Full Stack .NET Developer with hands-on experience in web, desktop, and database-driven application development. I work with C#, ASP.NET Core, SQL Server, ADO.NET, Entity Framework, RESTful APIs, and modern frontend tools. My goal is to build useful, maintainable, and scalable software that solves real problems.</p>
+          </div>
+          <div class="glass-card">
+            <ul class="focus-list">
+              <li>Strong interest in backend development and database systems</li>
+              <li>Comfortable with CRUD applications, API integration, and reporting</li>
+              <li>Focused on junior software engineer and full stack .NET roles</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Technical <span class="highlight">Skills</span></h2>
+            <p class="section-subtitle">A clean overview of the technologies I use for full stack application development.</p>
+          </div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="icon">⌨</div>
+            <h3>Frontend</h3>
+            <p>HTML5, CSS3, Bootstrap, JavaScript, jQuery, Angular, React</p>
+          </div>
+          <div class="skill-card">
+            <div class="icon">⚙</div>
+            <h3>Backend</h3>
+            <p>C#, ASP.NET MVC, ASP.NET Core, Web API, RESTful API Development</p>
+          </div>
+          <div class="skill-card">
+            <div class="icon">▣</div>
+            <h3>Database</h3>
+            <p>MS SQL Server, ADO.NET, Entity Framework 6, Entity Framework Core</p>
+          </div>
+          <div class="skill-card">
+            <div class="icon">☁</div>
+            <h3>Tools</h3>
+            <p>Git, GitHub, Visual Studio, VS Code, Crystal Reports, .NET MAUI</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+            <p class="section-subtitle">Selected repositories that show my practical development work with .NET, SQL Server, frontend, and full stack concepts.</p>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-top">
+              <h3>ASP.NET Core Identity Sales Management</h3>
+              <span class="badge">Featured</span>
+            </div>
+            <p>A sales management system using ASP.NET Core Identity, ViewComponent, aggregate reporting, and SQL Server-based data handling.</p>
+            <div class="tech">
+              <span>ASP.NET Core</span><span>Identity</span><span>SQL Server</span><span>ViewComponent</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/didar-code/ASP.NET-Core-Identity-with-ViewComponent-Aggregate-Sales-Management-System" target="_blank" class="small-link">View Repository →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <h3>ADO.NET WinForms SQL Server Project</h3>
+              <span class="badge">Desktop</span>
+            </div>
+            <p>A professional desktop application built with C#, .NET WinForms, ADO.NET, SQL Server, CRUD operations, and business data management.</p>
+            <div class="tech">
+              <span>C#</span><span>WinForms</span><span>ADO.NET</span><span>SQL Server</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/didar-code/ADO.Net-Project-with-C-.NET-WinForms-and-SQL-Server-" target="_blank" class="small-link">View Repository →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <h3>HTML CSS JavaScript Project</h3>
+              <span class="badge">Frontend</span>
+            </div>
+            <p>A frontend practice project showing responsive layout, clean UI structure, and JavaScript-based interactive web development fundamentals.</p>
+            <div class="tech">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive UI</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/didar-code/Web-Development-Mastery-HTML-CSS-JavaScript-Project" target="_blank" class="small-link">View Repository →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Let’s <span class="highlight">Connect</span></h2>
+            <p class="section-subtitle">Open to junior software engineer, full stack .NET developer, and internship opportunities.</p>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-item">
+            <strong>Email</strong>
+            <p><a href="mailto:chowdhuryd243@gmail.com">chowdhuryd243@gmail.com</a></p>
+          </div>
+          <div class="contact-item">
+            <strong>Phone</strong>
+            <p><a href="tel:+8801929179586">+8801929179586</a></p>
+          </div>
+          <div class="contact-item">
+            <strong>LinkedIn</strong>
+            <p><a href="https://www.linkedin.com/in/md-didarul-alam-chowdhury" target="_blank">View LinkedIn</a></p>
+          </div>
+          <div class="contact-item">
+            <strong>GitHub</strong>
+            <p><a href="https://github.com/didar-code/Md-Didarul-Alam-Chowdhury" target="_blank">View GitHub</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Md Didarul Alam Chowdhury. Built with HTML, CSS, and passion for .NET development.</p>
+    </div>
+  </footer>
+</body>
+</html>
